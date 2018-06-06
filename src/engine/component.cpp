@@ -1,5 +1,5 @@
 /*
- * This file is part of Pong.
+ * This file is part of PongSDL.
  * Copyright (C) 2018 Rodrigo Casamayor.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,37 +16,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "window.hpp"
+#include "component.hpp"
 
-namespace pong { namespace graphics {
-    
-    Window::Window(const char *title, int width, int height)
+#include "state.hpp"
+
+namespace engine {
+   Component::Component(const char *title, int width, int height, bool fullscreen)
+    : title(title), width(width), height(height), fullscreen(fullscreen)
     {
-        this->title = title;
-        this->width = width;
-        this->height = height;
         this->x = this->y = SDL_WINDOWPOS_CENTERED;
         
         if (!init())
-            this->~Window();
+            this->~Component();
     }
     
-    Window::~Window() { cleanup(); }
+    Component::~Component() { cleanup(); }
     
-    void Window::start()
+    void Component::start()
     {
         if (running) return;
         running = true;
         run();
     }
     
-    void Window::stop()
+    void Component::stop()
     {
         if (!running) return;
         running = false;
     }
     
-    void Window::run()
+    void Component::run()
     {
         int frames = 0;
         
@@ -87,14 +86,14 @@ namespace pong { namespace graphics {
         }
     }
     
-    bool Window::init()
+    bool Component::init()
     {
         if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
             std::cout << "[ERR] " << SDL_GetError() << std::endl;
             return false;
         } std::cout << "[LOG] " << "Initializing SDL..." << std::endl;
         
-        Uint32 win_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+        Uint32 win_flags = (fullscreen) ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
         window = SDL_CreateWindow(title, x, y, width, height, win_flags);
         if (!window) {
             std::cout << "[ERR] " << SDL_GetError() << std::endl;
@@ -111,29 +110,74 @@ namespace pong { namespace graphics {
         return true;
     }
     
-    void Window::tick()
+    void Component::tick()
     {
-        SDL_GetWindowSize(window, &width, &height);
+        states.back()->input(this);
+        states.back()->update(this);
         
-        while(SDL_PollEvent(&event)) {
-            if(event.type == SDL_QUIT)
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT)
                 stop();
         }
     }
     
-    void Window::render() const
+    void Component::render()
     {
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
+        states.back()->draw(this);
         
+        SDL_RenderClear(renderer);
         SDL_RenderPresent(renderer);
     }
     
-    void Window::cleanup() const
+    void Component::cleanup()
     {
+        while (!states.empty()) {
+            states.back()->dispose();
+            states.pop_back();
+        }
+        
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
     }
     
-} }
+    void Component::ChangeState(State *state)
+    {
+        // cleanup the current state
+        if (!states.empty()) {
+            states.back()->dispose();
+            states.pop_back();
+        }
+        
+        // store and init the new state
+        states.push_back(state);
+        states.back()->init();
+    }
+    
+    void Component::PushState(State *state)
+    {
+        // pause the current state
+        if (!states.empty()) {
+            states.back()->pause();
+        }
+        
+        // store and init the new state
+        states.push_back(state);
+        states.back()->init();
+    }
+    
+    void Component::PopState(State *state)
+    {
+        // cleanup the current state
+        if (!states.empty()) {
+            states.back()->dispose();
+            states.pop_back();
+        }
+        
+        // resume the previous state
+        if (!states.empty()) {
+            states.back()->resume();
+        }
+    }
+}

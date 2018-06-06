@@ -16,17 +16,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "engine/component.hpp"
-#include "game/states/menustate.hpp"
+#pragma once
 
-int main(int argc, char** args)
-{
-    std::cout << "==== DEBUG MODE ====" << std::endl;
-    
-    using namespace engine;
-    Component game("Pong!", 640, 480, false);
-    game.ChangeState(game::states::MenuState::getInstance());
-    game.start();
-    
-    return(0);
-}
+#include "state.hpp"
+
+namespace game { namespace  states {
+    class PauseState : public engine::State
+    {
+    public:
+        void init();
+        void dispose();
+        
+        void pause();
+        void resume();
+        
+        void input(engine::Component *comp);
+        void update(engine::Component *comp);
+        void draw(engine::Component *comp);
+        
+        // Singleton
+        static PauseState* getInstance()
+        {
+            return &m_PauseState;
+        }
+    protected:
+        PauseState() { }
+    private:
+        static PauseState m_PauseState;
+    };
+} }

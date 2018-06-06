@@ -1,5 +1,5 @@
 /*
- * This file is part of Pong.
+ * This file is part of PongSDL.
  * Copyright (C) 2018 Rodrigo Casamayor.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,37 +18,30 @@
 
 #pragma once
 
-#include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include "state.hpp"
 
-#define FPS 60
-
-namespace pong { namespace graphics {
-    
-    class Window
+namespace game { namespace  states {
+    class MenuState : public engine::State
     {
-    private:
-        const char *title;
-        int width, height;
-        int x, y;
-        
-        bool running;
-        
-        SDL_Window *window;
-        SDL_Renderer *renderer;
-        SDL_Event event;
     public:
-        Window(const char *title, int width, int height);
-        ~Window();
-        void start();
-        void stop();
-        void run();
+        void init();
+        void dispose();
+
+        void pause();
+        void resume();
+        
+        void input(engine::Component *comp);
+        void update(engine::Component *comp);
+        void draw(engine::Component *comp);
+        
+        // Singleton
+        static MenuState* getInstance()
+        {
+            return &m_MenuState;
+        }
+    protected:
+        MenuState() { }
     private:
-        bool init();
-        void tick();
-        void render() const;
-        void cleanup() const;
+        static MenuState m_MenuState;
     };
-    
 } }

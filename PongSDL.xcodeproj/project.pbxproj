@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		83253C7920C1560E0076D492 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83253C7720C1560E0076D492 /* window.cpp */; };
+		83122EB620C5810A00325ECC /* menustate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83122EB420C5810A00325ECC /* menustate.cpp */; };
+		83253C7920C1560E0076D492 /* component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83253C7720C1560E0076D492 /* component.cpp */; };
 		83253C7B20C156550076D492 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83253C7A20C156550076D492 /* main.cpp */; };
 		83253C7E20C156AD0076D492 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83253C7D20C156AD0076D492 /* libSDL2-2.0.0.dylib */; };
 		83253C8020C156BF0076D492 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83253C7F20C156BF0076D492 /* libSDL2_image-2.0.0.dylib */; };
@@ -15,6 +16,8 @@
 		83253C8C20C1577F0076D492 /* libSDL2-2.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 83253C7D20C156AD0076D492 /* libSDL2-2.0.0.dylib */; };
 		83253C8E20C158880076D492 /* libSDL2_image-2.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 83253C7F20C156BF0076D492 /* libSDL2_image-2.0.0.dylib */; };
 		83253C8F20C158DD0076D492 /* libSDL2_ttf-2.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 83253C8120C156D70076D492 /* libSDL2_ttf-2.0.0.dylib */; };
+		83CF0ADC20C6F0EB007FC53C /* pausestate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83CF0ADA20C6F0EB007FC53C /* pausestate.cpp */; };
+		83CF0AE020C6F109007FC53C /* playstate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83CF0ADE20C6F109007FC53C /* playstate.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,15 +36,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		83122EB420C5810A00325ECC /* menustate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = menustate.cpp; sourceTree = "<group>"; };
+		83122EB520C5810A00325ECC /* menustate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = menustate.hpp; sourceTree = "<group>"; };
 		83253C5D20C155960076D492 /* PongSDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PongSDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83253C6820C155960076D492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83253C6B20C155960076D492 /* PongSDL.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PongSDL.entitlements; sourceTree = "<group>"; };
-		83253C7720C1560E0076D492 /* window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
-		83253C7820C1560E0076D492 /* window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = window.hpp; sourceTree = "<group>"; };
+		83253C7720C1560E0076D492 /* component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = component.cpp; sourceTree = "<group>"; };
+		83253C7820C1560E0076D492 /* component.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = component.hpp; sourceTree = "<group>"; };
 		83253C7A20C156550076D492 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		83253C7D20C156AD0076D492 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../../usr/local/Cellar/sdl2/2.0.8/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		83253C7F20C156BF0076D492 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../../../usr/local/Cellar/sdl2_image/2.0.3/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		83253C8120C156D70076D492 /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../../../usr/local/Cellar/sdl2_ttf/2.0.14/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
+		836456E520C5672200B77B56 /* state.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = state.hpp; sourceTree = "<group>"; };
+		83CF0ADA20C6F0EB007FC53C /* pausestate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pausestate.cpp; sourceTree = "<group>"; };
+		83CF0ADB20C6F0EB007FC53C /* pausestate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pausestate.hpp; sourceTree = "<group>"; };
+		83CF0ADE20C6F109007FC53C /* playstate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = playstate.cpp; sourceTree = "<group>"; };
+		83CF0ADF20C6F109007FC53C /* playstate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = playstate.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +68,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		83122EB320C57FD500325ECC /* states */ = {
+			isa = PBXGroup;
+			children = (
+				83122EB420C5810A00325ECC /* menustate.cpp */,
+				83122EB520C5810A00325ECC /* menustate.hpp */,
+				83CF0ADA20C6F0EB007FC53C /* pausestate.cpp */,
+				83CF0ADB20C6F0EB007FC53C /* pausestate.hpp */,
+				83CF0ADE20C6F109007FC53C /* playstate.cpp */,
+				83CF0ADF20C6F109007FC53C /* playstate.hpp */,
+			);
+			path = states;
+			sourceTree = "<group>";
+		};
 		83253C5420C155960076D492 = {
 			isa = PBXGroup;
 			children = (
 				83253C7120C155B10076D492 /* src */,
+				83253C7C20C156AD0076D492 /* Frameworks */,
 				83253C5F20C155960076D492 /* PongSDL */,
 				83253C5E20C155960076D492 /* Products */,
-				83253C7C20C156AD0076D492 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,18 +112,10 @@
 			isa = PBXGroup;
 			children = (
 				83253C7A20C156550076D492 /* main.cpp */,
-				83253C7220C155BC0076D492 /* graphics */,
+				83CF0AE120C6F9CC007FC53C /* engine */,
+				83CF0AE520C6FA3C007FC53C /* game */,
 			);
 			path = src;
-			sourceTree = "<group>";
-		};
-		83253C7220C155BC0076D492 /* graphics */ = {
-			isa = PBXGroup;
-			children = (
-				83253C7720C1560E0076D492 /* window.cpp */,
-				83253C7820C1560E0076D492 /* window.hpp */,
-			);
-			path = graphics;
 			sourceTree = "<group>";
 		};
 		83253C7C20C156AD0076D492 /* Frameworks */ = {
@@ -111,6 +126,24 @@
 				83253C7D20C156AD0076D492 /* libSDL2-2.0.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83CF0AE120C6F9CC007FC53C /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				83253C7720C1560E0076D492 /* component.cpp */,
+				83253C7820C1560E0076D492 /* component.hpp */,
+				836456E520C5672200B77B56 /* state.hpp */,
+			);
+			path = engine;
+			sourceTree = "<group>";
+		};
+		83CF0AE520C6FA3C007FC53C /* game */ = {
+			isa = PBXGroup;
+			children = (
+				83122EB320C57FD500325ECC /* states */,
+			);
+			path = game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,7 +233,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				83253C7B20C156550076D492 /* main.cpp in Sources */,
-				83253C7920C1560E0076D492 /* window.cpp in Sources */,
+				83253C7920C1560E0076D492 /* component.cpp in Sources */,
+				83CF0AE020C6F109007FC53C /* playstate.cpp in Sources */,
+				83CF0ADC20C6F0EB007FC53C /* pausestate.cpp in Sources */,
+				83122EB620C5810A00325ECC /* menustate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
